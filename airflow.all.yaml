@@ -132,6 +132,8 @@ spec:
         env:
         - name: AIRFLOW_HOME
           value: "/usr/local/airflow"
+        - name: EXECUTOR
+          value: "Celery"
         ports:
         - name: web
           containerPort: 8080
@@ -156,6 +158,8 @@ spec:
         env:
         - name: AIRFLOW_HOME
           value: "/usr/local/airflow"
+        - name: EXECUTOR
+          value: "Celery"
         # To prevent the error: ValueError: invalid literal for int() with base 10: 'tcp://10.0.0.83:5555'
         - name: FLOWER_PORT
           value: "5555"
@@ -185,6 +189,8 @@ spec:
         env:
         - name: AIRFLOW_HOME
           value: "/usr/local/airflow"
+        - name: EXECUTOR
+          value: "Celery"
         args: ["scheduler", "-n", "5"]
 ---
 apiVersion: extensions/v1beta1
@@ -209,6 +215,8 @@ spec:
         env:
         - name: AIRFLOW_HOME
           value: "/usr/local/airflow"
+        - name: EXECUTOR
+          value: "Celery"
         args: ["worker"]
       volumes:
         - name: git-volume
