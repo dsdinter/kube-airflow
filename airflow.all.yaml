@@ -84,9 +84,6 @@ spec:
         app: airflow
         tier: db
     spec:
-      selector:
-        app: airflow
-        tier: db
       containers:
       - name: postgres
         image: postgres
@@ -113,9 +110,6 @@ spec:
         app: airflow
         tier: redis
     spec:
-      selector:
-        app: airflow
-        tier: redis
       restartPolicy: Always
       containers:
       - name: redis
@@ -143,9 +137,6 @@ spec:
         app: airflow
         tier: web
     spec:
-    selector:
-        app: airflow
-        tier: web
       restartPolicy: Always
       containers:
       - name: web
@@ -172,9 +163,6 @@ spec:
         app: airflow
         tier: flower
     spec:
-    selector:
-        app: airflow
-        tier: flower
       restartPolicy: Always
       containers:
       - name: flower
@@ -204,9 +192,6 @@ spec:
         app: airflow
         tier: scheduler
     spec:
-    selector:
-        app: airflow
-        tier: scheduler
       restartPolicy: Always
       containers:
       - name: scheduler
@@ -232,9 +217,6 @@ spec:
         app: airflow
         tier: worker
     spec:
-    selector:
-        app: airflow
-        tier: worker
       restartPolicy: Always
       containers:
       - name: worker
