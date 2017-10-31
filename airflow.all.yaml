@@ -209,8 +209,14 @@ spec:
       containers:
       - name: worker
         image: puckel/docker-airflow
-        # volumes:
-        #     - /localpath/to/dags:/usr/local/airflow/dags
+        volumeMounts:
+        - mountPath: /usr/local/airflow/dags
+          name: git-volume
+        volumes:
+            - name: git-volume
+              gitRepo:
+                repository: "git@somewhere:me/my-git-repository.git"
+                # revision: "22f1d8406d464b0c0874075539c1f2e96c253775"
         env:
         - name: AIRFLOW_HOME
           value: "/usr/local/airflow"
