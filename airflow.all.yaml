@@ -16,21 +16,17 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: rabbitmq
+  name: redis
 spec:
   type: ClusterIP
   selector:
     app: airflow
-    tier: rabbitmq
+    tier: redis
   ports:
     - name: node
       protocol: TCP
-      port: 5672
+      port: 6379
       targetPort: node
-    - name: management
-      protocol: TCP
-      port: 15672
-      targetPort: management
 ---
 apiVersion: v1
 kind: Service
@@ -93,30 +89,28 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: rabbitmq
+  name: redis
 spec:
   replicas: 1
   template:
     metadata:
       labels:
         app: airflow
-        tier: rabbitmq
+        tier: redis
     spec:
       restartPolicy: Always
       containers:
-      - name: rabbitmq
-        image: rabbitmq:3-management
+      - name: redis
+        image: redis:3.2.7
         ports:
-        - name: management
-          containerPort: 15672
         - name: node
-          containerPort: 5672
+          containerPort: 6379
         env:
-        - name: RABBITMQ_DEFAULT_USER
+        - name: REDIS_DEFAULT_USER
           value: airflow
-        - name: RABBITMQ_DEFAULT_PASS
+        - name: REDIS_DEFAULT_PASS
           value: airflow
-        - name: RABBITMQ_DEFAULT_VHOST
+        - name: REDIS_DEFAULT_VHOST
           value: airflow
 ---
 apiVersion: extensions/v1beta1
