@@ -215,7 +215,7 @@ spec:
         volumes:
             - name: git-volume
               gitRepo:
-                repository: "git@somewhere:me/my-git-repository.git"
+                repository: "https://github.com/dsdinter/dag-examples.git"
                 # revision: "22f1d8406d464b0c0874075539c1f2e96c253775"
         env:
         - name: AIRFLOW_HOME
