@@ -193,7 +193,7 @@ spec:
           value: "/usr/local/airflow"
         args: ["scheduler", "-n", "5"]
 ---
-apiVersion: extensions/v1beta1
+apiVersion: v1
 kind: Deployment
 metadata:
   name: worker
@@ -210,14 +210,14 @@ spec:
       - name: worker
         image: puckel/docker-airflow
         volumeMounts:
-        - mountPath: /usr/local/airflow/dags
-          name: git-volume
-        volumes:
-            - name: git-volume
-              gitRepo:
-                repository: "https://github.com/dsdinter/dag-examples.git"
-                # revision: "22f1d8406d464b0c0874075539c1f2e96c253775"
+        - name: git-volume
+          mountPath: /usr/local/airflow/dags
         env:
         - name: AIRFLOW_HOME
           value: "/usr/local/airflow"
         args: ["worker"]
+      volumes:
+        - name: git-volume
+          gitRepo:
+            repository: "https://github.com/dsdinter/dag-examples.git"
+            # revision: "22f1d8406d464b0c0874075539c1f2e96c253775"
